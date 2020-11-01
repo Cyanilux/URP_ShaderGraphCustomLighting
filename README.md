@@ -1,5 +1,6 @@
 # Shader Graph Custom Lighting
-Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline
+Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. v8.2.0, Unity 2020.1.2f1.
+(Hopefully works in other versions? If anything breaks, let me know by opening an issue)
 
 Includes Custom Functions / Sub Graphs for :
 - **Main Light**
