@@ -1,6 +1,8 @@
 #ifndef CUSTOM_LIGHTING_INCLUDED
 #define CUSTOM_LIGHTING_INCLUDED
 
+// @Cyanilux | https://github.com/Cyanilux/URP_ShaderGraphCustomLighting
+
 //------------------------------------------------------------------------------------------------------
 // Main Light
 //------------------------------------------------------------------------------------------------------
