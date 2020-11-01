@@ -129,7 +129,6 @@ void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 World
 	int pixelLightCount = GetAdditionalLightsCount();
 	for (int i = 0; i < pixelLightCount; ++i) {
 		Light light = GetAdditionalLight(i, WorldPosition);
-		float3 attenuatedLightColor = light.color * step(0.1, light.distanceAttenuation * light.shadowAttenuation);
 
 		// DIFFUSE
 		diffuseColor += light.color * (0.5 + step(0.5, light.distanceAttenuation)) * step(0.1, light.distanceAttenuation * light.shadowAttenuation);
