@@ -13,7 +13,14 @@
             "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"8b8a45c8-136e-436c-975f-285c4d757e00\"\n    },\n    \"m_Name\": \"Smoothness\",\n    \"m_DefaultReferenceName\": \"Vector1_A38DA60E\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         }
     ],
-    "m_SerializedKeywords": [],
+    "m_SerializedKeywords": [
+        {
+            "typeInfo": {
+                "fullName": "UnityEditor.ShaderGraph.ShaderKeyword"
+            },
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"1d782cea-8bf4-47b4-a7a6-dfcc49e9412e\"\n    },\n    \"m_Name\": \"Shadows\",\n    \"m_DefaultReferenceName\": \"BOOLEAN_7FA69C21_ON\",\n    \"m_OverrideReferenceName\": \"_ADDITIONAL_LIGHT_SHADOWS\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_KeywordType\": 0,\n    \"m_KeywordDefinition\": 1,\n    \"m_KeywordScope\": 1,\n    \"m_Entries\": [],\n    \"m_Value\": 0,\n    \"m_IsEditable\": true,\n    \"m_IsExposable\": true\n}"
+        }
+    ],
     "m_SerializableNodes": [
         {
             "typeInfo": {
