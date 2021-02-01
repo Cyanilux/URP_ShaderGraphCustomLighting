@@ -131,7 +131,7 @@ void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 World
 		Light light = GetAdditionalLight(i, WorldPosition);
 
 		// DIFFUSE
-		diffuseColor += light.color * (0.5 + step(0.5, light.distanceAttenuation)) * step(0.1, light.distanceAttenuation * light.shadowAttenuation);
+		diffuseColor += light.color * step(0.0001, light.distanceAttenuation * light.shadowAttenuation);
 		
 		/* (LightingLambert)
 		half NdotL = saturate(dot(normal, lightDir));
