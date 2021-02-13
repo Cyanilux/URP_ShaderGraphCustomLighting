@@ -29,4 +29,5 @@ Material:
     - _Smoothness: 0.4
     m_Colors:
     - _DiffuseColor: {r: 0.26274508, g: 0.8862745, b: 0.8155137, a: 0}
+    - _SpecularColour: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

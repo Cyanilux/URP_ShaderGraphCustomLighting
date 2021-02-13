@@ -10,6 +10,7 @@
 /*
 - Obtains the Direction, Color and Distance Atten for the Main Light.
 - (DistanceAtten is either 0 or 1 for directional light, depending if the light is in the culling mask or not)
+- If you want shadow attenutation, see MainLightShadows_float, or use MainLightFull_float instead
 */
 void MainLight_float (out float3 Direction, out float3 Color, out float DistanceAtten){
 	#ifdef SHADERGRAPH_PREVIEW
@@ -30,11 +31,25 @@ void MainLight_float (out float3 Direction, out float3 Color, out float Distance
 
 /*
 - Samples the Shadowmap for the Main Light, based on the World Position passed in. (Position node)
-- Bypasses need for MAIN_LIGHT_CALCULATE_SHADOWS / _MAIN_LIGHT_SHADOWS, so will work with Unlit.
-- Note it can kinda break/glitch if no shadows are cast on the object.
-- To correctly support shadow cascades and soft shadow options, this should be used with the keywords :
-	- Boolean Keyword "_MAIN_LIGHT_SHADOWS_CASCADE", Global Multi-Compile
-	- Boolean Keyword "_SHADOWS_SOFT", Global Multi-Compile
+- Note that this method only works in an Unlit Graph if Shadow Cascades is set to 2 or higher!
+- For shadows to work in the Unlit Graph, the following keywords must be defined in the blackboard :
+	- Boolean Keyword, Global Multi-Compile "_MAIN_LIGHT_SHADOWS" (must be present to also stop the others being stripped from builds)
+	- Boolean Keyword, Global Multi-Compile "_MAIN_LIGHT_SHADOWS_CASCADE"
+	- Boolean Keyword, Global Multi-Compile "_SHADOWS_SOFT"
+- For a PBR/Lit Graph, these keywords are already handled for you.
+
+----
+To Do / Notes
+
+- Currently this method only supports realtime shadows, but there's also baked shadows to look into (shadow masks, introduced in v10). 
+
+- Haven't looked much into URPv11/12+ yet, but they've also changed how the keywords are defined (looking at master branch of Graphics github)
+- Rather than a Boolean Keyword, it's an Enum Keyword with 4 modes (off, shadows, cascades and screen) :
+- #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+- Supporting screen would need the clip space position passed in :
+	- float4 shadowCoord = ComputeScreenPos(positionCS);
+	- Ideally, it would also be handled in vertex shader and passed through fragment, that's not something we can do in shader graph yet though.
+- When newer versions are out of beta I might try looking into updating this.
 */
 void MainLightShadows_float (float3 WorldPos, out float ShadowAtten){
 	#ifdef SHADERGRAPH_PREVIEW
@@ -42,10 +57,18 @@ void MainLightShadows_float (float3 WorldPos, out float ShadowAtten){
 	#else
 		float4 shadowCoord = TransformWorldToShadowCoord(WorldPos);
 		
+		ShadowAtten = MainLightRealtimeShadow(shadowCoord);
+
+		/*
+		- Used to use this, but while it works in editor it doesn't work in builds. :(
+		- Bypasses need for _MAIN_LIGHT_SHADOWS (/MAIN_LIGHT_CALCULATE_SHADOWS), so won't error in an Unlit Graph even at no/1 cascades.
+		- Note it can kinda break/glitch if no shadows are cast on the screen.
+
 		ShadowSamplingData shadowSamplingData = GetMainLightShadowSamplingData();
 		half4 shadowParams = GetMainLightShadowParams();
 		ShadowAtten = SampleShadowmap(TEXTURE2D_ARGS(_MainLightShadowmapTexture, sampler_MainLightShadowmapTexture),
 							shadowCoord, shadowSamplingData, shadowParams, false);
+		*/
 	#endif
 }
 
@@ -87,9 +110,12 @@ void MixFog_float (float3 Colour, float Fog, out float3 Out){
 //------------------------------------------------------------------------------------------------------
 
 /*
-- For custom lighting, you'd want to duplicate this and swap the LightingLambert / LightingSpecular functions out.
-- See Toon Example below!
-- For shadows to work in the Unlit Graph, add the Boolean Keyword "_ADDITIONAL_LIGHT_SHADOWS", Global Multi-Compile.
+- Handles additional lights (e.g. point, spotlights)
+- For custom lighting, you'd want to duplicate this and swap the LightingLambert / LightingSpecular functions out. See Toon Example below!
+- For shadows to work in the Unlit Graph, the following keywords must be defined in the blackboard :
+	- Boolean Keyword, Global Multi-Compile "_ADDITIONAL_LIGHT_SHADOWS"
+	- Boolean Keyword, Global Multi-Compile "_ADDITIONAL_LIGHTS" (required to prevent the one above from being stripped from builds)
+- For a PBR/Lit Graph, these keywords are already handled for you.
 */
 void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
 							out float3 Diffuse, out float3 Specular) {
@@ -102,7 +128,24 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
    WorldView = SafeNormalize(WorldView);
    int pixelLightCount = GetAdditionalLightsCount();
    for (int i = 0; i < pixelLightCount; ++i) {
-       Light light = GetAdditionalLight(i, WorldPosition);
+		#if VERSION_GREATER_EQUAL(10, 1)
+
+			Light light = GetAdditionalLight(i, WorldPosition, half4(1,1,1,1));
+
+			// URP v10.1.0 introduced an additional shadowMask parameter, which is required for additional lights to do shadow calculations.
+			// The purpose of this is to support the ShadowMask baked lighting mode.
+			// The "correct" way to support it is to use :
+			// inputData.shadowMask = SAMPLE_SHADOWMASK(input.lightmapUV);
+			// inside the fragment shader. lightmapUV is TEXCOORD1 input passed through vert->frag
+			// It would also need the SHADOWS_SHADOWMASK keyword to be defined if using an Unlit Graph. (maybe also LIGHTMAP_SHADOW_MIXING)
+			// Since this should only be sampled once, it should likely be a separate node and passed in.
+
+			// For now, I'm ignoring support for ShadowMask, and just using half4(1,1,1,1)
+
+		#else
+			Light light = GetAdditionalLight(i, WorldPosition);
+		#endif
+
        float3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
        diffuseColor += LightingLambert(attenuatedLightColor, light.direction, WorldNormal);
        specularColor += LightingSpecular(attenuatedLightColor, light.direction, WorldNormal, WorldView, float4(SpecColor, 0), Smoothness);
@@ -128,7 +171,12 @@ void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 World
 	WorldView = SafeNormalize(WorldView);
 	int pixelLightCount = GetAdditionalLightsCount();
 	for (int i = 0; i < pixelLightCount; ++i) {
-		Light light = GetAdditionalLight(i, WorldPosition);
+		#if VERSION_GREATER_EQUAL(10, 1)
+			Light light = GetAdditionalLight(i, WorldPosition, half4(1,1,1,1));
+			// see AdditionalLights_float for explanation of this
+		#else
+			Light light = GetAdditionalLight(i, WorldPosition);
+		#endif
 
 		// DIFFUSE
 		diffuseColor += light.color * step(0.0001, light.distanceAttenuation * light.shadowAttenuation);

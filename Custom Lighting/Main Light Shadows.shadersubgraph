@@ -12,6 +12,12 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.ShaderKeyword"
             },
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"1feaf4d7-0891-4969-9957-9a8a8b3de535\"\n    },\n    \"m_Name\": \"Shadows\",\n    \"m_DefaultReferenceName\": \"BOOLEAN_DC7B8ACB_ON\",\n    \"m_OverrideReferenceName\": \"_MAIN_LIGHT_SHADOWS\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_KeywordType\": 0,\n    \"m_KeywordDefinition\": 1,\n    \"m_KeywordScope\": 1,\n    \"m_Entries\": [],\n    \"m_Value\": 0,\n    \"m_IsEditable\": true,\n    \"m_IsExposable\": true\n}"
+        },
+        {
+            "typeInfo": {
+                "fullName": "UnityEditor.ShaderGraph.ShaderKeyword"
+            },
             "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"b9afe5a1-5a3b-4c47-aee5-22c981310ced\"\n    },\n    \"m_Name\": \"Shadows Cascade\",\n    \"m_DefaultReferenceName\": \"BOOLEAN_8BCC55B8_ON\",\n    \"m_OverrideReferenceName\": \"_MAIN_LIGHT_SHADOWS_CASCADE\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_KeywordType\": 0,\n    \"m_KeywordDefinition\": 1,\n    \"m_KeywordScope\": 1,\n    \"m_Entries\": [],\n    \"m_Value\": 0,\n    \"m_IsEditable\": true,\n    \"m_IsExposable\": true\n}"
         },
         {
@@ -61,15 +67,15 @@
         {
             "m_GuidSerialized": "c73388d7-296b-4b5b-bcba-844edbb686b2",
             "m_Title": "Note",
-            "m_Content": "The Sub Graph bypasses the MAIN_LIGHT_CALCULATE_SHADOWS define, but still relies on the _MAIN_LIGHT_SHADOWS_CASCADE and _SHADOWS_SOFT keywords, which are set by URP automatically. They have been added to the blackboard.\n\nThis means it should work with the Unlit Graph, without needing to do anything else!\n\nShould also work with PBR still. Maybe creating some extra shader variants. I'm unsure on the behaviour when having the same multi_compiles defined twice.",
+            "m_Content": "The \"_MAIN_LIGHT_SHADOWS\" keyword is required for URP to handle shadows and also prevents Unity/URP from stripping shadow variants from the build.\n\nHowever, it usually needs a shadowCoord variable to be passed through the Varyings struct. Since this isn't included in an Unlit Graph, it causes an error to occur. This only occurs if Shadow Cascades is set to 1 (or None) though.\n\nCurrently the only way to have shadows work correctly, is to always have at least 2 Shadow Cascades. :(\n\nThe \"_MAIN_LIGHT_SHADOWS_CASCADE\" and \"_SHADOWS_SOFT\" keywords have also been added to the Blackboard, as Global Multi-Compiles. Unity/URP will set these automatically.\n\nThese Sub Graphs are intended to be used with the Unlit Graph.\n\nShould also work with PBR/Lit still, but it might create some extra unnecessary shader variants. I'm unsure on the behaviour when having the same multi_compiles defined twice. If you want to use it in the PBR/Lit, create a copy without the keywords.",
             "m_TextSize": 0,
             "m_Theme": 0,
             "m_Position": {
                 "serializedVersion": "2",
                 "x": 265.0,
                 "y": 13.0,
-                "width": 232.0,
-                "height": 272.2173767089844
+                "width": 444.0,
+                "height": 308.0
             },
             "m_GroupGuidSerialized": "00000000-0000-0000-0000-000000000000"
         }
