@@ -1,6 +1,8 @@
 # Shader Graph Custom Lighting
-Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. v8.3.1, Unity 2020.1.17f1.
-(Hopefully works in other versions? If anything breaks, let me know by opening an issue)
+Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. v8.3.1, Unity 2020.1.17f1. Also should work in URP v10+ and v11, though doesn't support all features yet (e.g. baked shadows)
+If anything breaks, let me know by opening an issue!
+
+You can install the functions/subgraphs as a unity package using the Package Manager window, Add Package from Git URL : https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git, or download manually and add the folder to your Assets.
 
 Includes Sub Graphs for :
 - **Main Light**
@@ -8,7 +10,7 @@ Includes Sub Graphs for :
 - **Main Light Shadows**
   - Inputs : World Position (Vector3)
   - Outputs : Shadow Atten (Vector1)
-  - **Important Note : Will only work in an Unlit Graph if Shadow Cascades is 2 or higher on the URP Asset (possibly all URP assets in project). It will error with No Cascades / 1 Cascade.** See CustomLighting.hlsl for more information. (If you have troubles when building, try Build instead of Build And Run)
+  - (Now works with all Shadow Cascades settings!)
 - **Ambient** (uses per-pixel SampleSH, use add node to apply this. Alternatively use the Baked GI node instead of this one)
   - Outputs : Ambient (Vector3)
 - **Mix Fog** (applies fog to the colour, should be used just before outputting colour to master)

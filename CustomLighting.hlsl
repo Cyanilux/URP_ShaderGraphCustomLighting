@@ -30,26 +30,32 @@ void MainLight_float (out float3 Direction, out float3 Color, out float Distance
 //------------------------------------------------------------------------------------------------------
 
 /*
+- This undef (un-define) is required to prevent the "invalid subscript 'shadowCoord'" error,
+  which occurs when _MAIN_LIGHT_SHADOWS is used with 1/No Shadow Cascades with the Unlit Graph.
+- It's technically not required for the PBR/Lit graph, so I'm using the SHADERPASS_FORWARD to ignore it for the pass.
+  (But it would probably still remove the interpolator for other passes in the PBR/Lit graph and use a per-pixel version)
+*/
+#ifndef SHADERGRAPH_PREVIEW
+	#if VERSION_GREATER_EQUAL(9, 0)
+		#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
+		#if (SHADERPASS != SHADERPASS_FORWARD)
+			#undef REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR
+		#endif
+	#else
+		#ifndef SHADERPASS_FORWARD
+			#undef REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR
+		#endif
+	#endif
+#endif
+
+/*
 - Samples the Shadowmap for the Main Light, based on the World Position passed in. (Position node)
-- Note that this method only works in an Unlit Graph if Shadow Cascades is set to 2 or higher!
+- Works in an Unlit Graph with all Shadow Cascade options, see above fix! :)
 - For shadows to work in the Unlit Graph, the following keywords must be defined in the blackboard :
 	- Boolean Keyword, Global Multi-Compile "_MAIN_LIGHT_SHADOWS" (must be present to also stop the others being stripped from builds)
 	- Boolean Keyword, Global Multi-Compile "_MAIN_LIGHT_SHADOWS_CASCADE"
 	- Boolean Keyword, Global Multi-Compile "_SHADOWS_SOFT"
 - For a PBR/Lit Graph, these keywords are already handled for you.
-
-----
-To Do / Notes
-
-- Currently this method only supports realtime shadows, but there's also baked shadows to look into (shadow masks, introduced in v10). 
-
-- Haven't looked much into URPv11/12+ yet, but they've also changed how the keywords are defined (looking at master branch of Graphics github)
-- Rather than a Boolean Keyword, it's an Enum Keyword with 4 modes (off, shadows, cascades and screen). Something to be aware of.
-- #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-- Supporting screen would need the clip space position passed in :
-	- float4 shadowCoord = ComputeScreenPos(positionCS);
-	- Ideally, it would also be handled in vertex shader and passed through fragment, that's not something we can do in shader graph yet though.
-- When newer versions are out of beta I might try looking into updating this.
 */
 void MainLightShadows_float (float3 WorldPos, out float ShadowAtten){
 	#ifdef SHADERGRAPH_PREVIEW
@@ -76,12 +82,25 @@ void MainLightShadows_float (float3 WorldPos, out float ShadowAtten){
 	#endif
 }
 
+/*
+To Do / Notes
+- Currently this method only supports realtime shadows, but there's also baked shadows to look into (shadow masks, introduced in v10). 
+
+- Haven't looked much into URPv11/12+ yet, but they've also changed how the keywords are defined (looking at master branch of Graphics github)
+  Rather than a Boolean Keyword, it's an Enum Keyword with 4 modes (off, shadows, cascades and screen). Something to be aware of.
+     #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+- Supporting screen would need the clip space position passed in :
+	- float4 shadowCoord = ComputeScreenPos(positionCS);
+	- Ideally, it would also be handled in vertex shader and passed through fragment, that's not something we can do in shader graph yet though.
+- When newer versions are out of beta I might try looking into updating this.
+*/
+
 //------------------------------------------------------------------------------------------------------
 // Ambient Lighting
 //------------------------------------------------------------------------------------------------------
 
 /*
-- Uses "SampleSH", the spherical harmonic stuff that ambient lighting uses.
+- Uses "SampleSH", the spherical harmonic stuff that ambient lighting / light probes uses.
 - Will likely be used in the fragment, so will be per-pixel.
 - Alternatively could use the Baked GI node, as it'll also handle this for you.
 - Could also use the Ambient node, would be cheaper but the result won't automatically adapt based on the Environmental Lighting Source (Lighting tab).
@@ -133,19 +152,17 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
    int pixelLightCount = GetAdditionalLightsCount();
    for (int i = 0; i < pixelLightCount; ++i) {
 		#if VERSION_GREATER_EQUAL(10, 1)
-			
 			Light light = GetAdditionalLight(i, WorldPosition, half4(1,1,1,1));
-
-			// URP v10.1.0 introduced an additional shadowMask parameter, which is required for additional lights to do shadow calculations.
-			// The purpose of this is to support the ShadowMask baked lighting mode.
-			// The "correct" way to support it is to use :
-			// inputData.shadowMask = SAMPLE_SHADOWMASK(input.lightmapUV);
-			// inside the fragment shader. lightmapUV is TEXCOORD1 input passed through vert->frag
-			// It would also need the SHADOWS_SHADOWMASK keyword to be defined if using an Unlit Graph. (maybe also LIGHTMAP_SHADOW_MIXING)
-			// Since this should only be sampled once, it should likely be a separate node and passed in.
-
-			// For now, I'm ignoring support for ShadowMask, and just using half4(1,1,1,1)
-
+			/*
+			URP v10.1.0 introduced an additional shadowMask parameter, which is required for additional lights to do shadow calculations.
+			The purpose of this is to support the ShadowMask baked lighting mode.
+			The "correct" way to support it is to use :
+			   inputData.shadowMask = SAMPLE_SHADOWMASK(input.lightmapUV);
+			inside the fragment shader. lightmapUV is TEXCOORD1 input passed through vert->frag
+			It would also need the SHADOWS_SHADOWMASK keyword to be defined if using an Unlit Graph. (maybe also LIGHTMAP_SHADOW_MIXING)
+			Since this should only be sampled once, it should likely be a separate node and passed in.
+			For now, I'm ignoring support for ShadowMask, and just using half4(1,1,1,1)
+			*/
 		#else
 			Light light = GetAdditionalLight(i, WorldPosition);
 		#endif
