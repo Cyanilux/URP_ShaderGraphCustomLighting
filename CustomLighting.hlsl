@@ -186,6 +186,7 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
 - Is an alternative to produce multiple bands rather than solid colour. See AdditionalLightsToon function below
 */
 /*
+#ifndef SHADERGRAPH_PREVIEW
 void GetAdditionalLightDistanceSqrRange(int i, float3 positionWS, out float distanceSqr, out float range){
 	int perObjectLightIndex = GetPerObjectLightIndex(i); // (i = index used in loop)
 	#if USE_STRUCTURED_BUFFER_FOR_LIGHT_DATA
@@ -200,6 +201,7 @@ void GetAdditionalLightDistanceSqrRange(int i, float3 positionWS, out float dist
 	distanceSqr = max(dot(lightVector, lightVector), HALF_MIN);
 	range = rsqrt(distanceAndSpotAttenuation.x);
 }
+#endif
 */
 
 void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
