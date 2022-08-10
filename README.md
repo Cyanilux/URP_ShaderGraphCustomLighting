@@ -1,10 +1,16 @@
 # Shader Graph Custom Lighting
-Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. v8.3.1, Unity 2020.1.17f1. Also should work in URP v10+ and v11, though doesn't support all features yet (e.g. baked shadows)
-If anything breaks, let me know by opening an issue!
+Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. If anything breaks, let me know by opening an issue!
 
-You can install the functions/subgraphs as a unity package using the Package Manager window, Add Package from Git URL : https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git, or download manually and add the folder to your Assets.
+```diff
++ This version is for URP v8+ (2021.1+) See branches for newer versions!
+```
 
-Includes Sub Graphs for :
+### Setup:
+- Install via Package Manager → Add package via git URL : 
+  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git#v8`
+- Alternatively, download and put the folder in your Assets
+
+### Includes Sub Graphs for :
 - **Main Light**
   - Outputs : Direction (Vector3), Colour (Vector4), Distance Atten (Vector1/Float)
 - **Main Light Shadows**
