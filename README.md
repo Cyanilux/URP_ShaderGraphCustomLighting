@@ -2,7 +2,7 @@
 Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. If anything breaks, let me know by opening an issue!
 
 ```diff
-+ This version is for URP v8+ (2021.1+) See branches for newer versions!
++ This version is for URP v8+ (2020.1+) See branches for newer versions!
 ```
 
 ### Setup:
