@@ -184,19 +184,21 @@ float ToonAttenuation(int i, float3 positionWS, float pointBands, float spotBand
 	float3 lightVector = lightPositionWS.xyz - positionWS * lightPositionWS.w;
 	float distanceSqr = max(dot(lightVector, lightVector), HALF_MIN);
 	float range = rsqrt(distanceAndSpotAttenuation.x);
+	float dist = sqrt(distanceSqr) / range;
 
 	// Spot
 	half3 lightDirection = half3(lightVector * rsqrt(distanceSqr));
 	half SdotL = dot(spotDirection.xyz, lightDirection);
 	half spotAtten = saturate(SdotL * distanceAndSpotAttenuation.z + distanceAndSpotAttenuation.w);
 	spotAtten *= spotAtten;
+	float maskSpotToRange = step(dist, 1);
 
 	// Atten
 	bool isSpot = (distanceAndSpotAttenuation.z > 0);
 	return isSpot ? 
 		//step(0.01, spotAtten) :		// cheaper if you just want "1" band for spot lights
-		floor(spotAtten * spotBands) / spotBands :
-		saturate(1.0 - floor(sqrt(distanceSqr) / range * pointBands) / pointBands);
+		(floor(spotAtten * spotBands) / spotBands) * maskSpotToRange :
+		saturate(1.0 - floor(dist * pointBands) / pointBands);
 }
 #endif
 
