@@ -23,9 +23,9 @@ Material:
   m_Name: Toon
   m_Shader: {fileID: -6465566751694194690, guid: 2753d56cee62e1e4c815b7d92a3a0328,
     type: 3}
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - ADDITIONAL_LIGHTS_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _RampTexture:
@@ -69,8 +69,10 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
+    - _DYNAMICLIGHTMAP: 0
     - _DstBlend: 0
     - _LIGHTMAP: 0
+    - _LIGHTMAP_SHADOW_MIXING: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SPECULAR: 0
@@ -81,6 +83,6 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _DiffuseColor: {r: 1, g: 0, b: 0, a: 1}
+    - _DiffuseColor: {r: 0.09803923, g: 0.8862745, b: 0.7573516, a: 1}
     - _SpecularColour: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

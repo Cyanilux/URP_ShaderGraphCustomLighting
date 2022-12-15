@@ -105,6 +105,26 @@ void AmbientSampleSH_float (float3 WorldNormal, out float3 Ambient){
 }
 
 //------------------------------------------------------------------------------------------------------
+// Subtractive Baked GI
+//------------------------------------------------------------------------------------------------------
+/*
+- Used to support "Subtractive" mode in Lighting window.
+- To work in an Unlit Graph, likely requires keywords :
+	- Boolean Keyword, Global Multi-Compile "LIGHTMAP_SHADOW_MIXING"
+	- (also LIGHTMAP_ON, but I believe Shader Graph is already defining this one)
+*/
+void SubtractiveGI_float (float ShadowAtten, float3 normalWS, float3 bakedGI, out half3 result){
+	#ifdef SHADERGRAPH_PREVIEW
+		result = half3(1,1,1);
+	#else
+		Light mainLight = GetMainLight();
+		mainLight.shadowAttenuation = ShadowAtten;
+		MixRealtimeAndBakedGI(mainLight, normalWS, bakedGI);
+		result = bakedGI;
+	#endif
+}
+
+//------------------------------------------------------------------------------------------------------
 // Mix Fog
 //------------------------------------------------------------------------------------------------------
 
