@@ -163,7 +163,7 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
 	WorldView = SafeNormalize(WorldView);
 	int pixelLightCount = GetAdditionalLightsCount();
 	for (int i = 0; i < pixelLightCount; ++i) {
-		Light light = GetAdditionalLight(i, WorldPosition, half4(1,1,1,1));
+		Light light = GetAdditionalLight(i, WorldPosition, Shadowmask);
 
 		float3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
 		diffuseColor += LightingLambert(attenuatedLightColor, light.direction, WorldNormal);
