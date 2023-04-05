@@ -87,7 +87,11 @@
             "m_Id": "8d9c735ecc074431b9fcfb5efee2db15"
         }
     ],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "2638b776e49e401b8d28380efdf9f69e"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -363,7 +367,7 @@
         },
         "preventRotation": false
     },
-    "m_Path": "Custom Lighting",
+    "m_Path": "Custom Lighting/Deprecated",
     "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
@@ -580,6 +584,26 @@
         "m_SerializableColors": []
     },
     "m_ExponentialBase": 1
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "2638b776e49e401b8d28380efdf9f69e",
+    "m_Title": "Deprecated",
+    "m_Content": "Still works fine, but I've created a Main Light Specular Highlights subgraph which combines this with the Phong model via a nice dropdown",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 820.0,
+        "y": -210.0,
+        "width": 193.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
@@ -1766,10 +1790,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "d34a9e9654feb78bb289d9f38a7251f0",
     "m_Id": 3,
-    "m_DisplayName": "Distance Atten",
+    "m_DisplayName": "CullingMask",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "DistanceAtten",
+    "m_ShaderOutputName": "CullingMask",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -2021,9 +2045,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 105.0000228881836,
-            "y": 86.9999771118164,
-            "width": 55.999900817871097,
+            "x": 76.99999237060547,
+            "y": 88.00001525878906,
+            "width": 56.00000762939453,
             "height": 24.0
         }
     },

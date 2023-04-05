@@ -17,6 +17,9 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
   - Inputs : World Position (Vector3), Shadowmask (Vector4) (Can leave at 1,1,1,1 if you don't need it)
   - Outputs : Shadow Atten (Float)
   - (Now works with all Shadow Cascades settings!)
+- **Main Light Cookie**
+  - Inputs : World Position (Vector3)
+  - Outputs : Cookie (Vector3)
 - **Sample Shadowmask** (attach this to the Shadowmask port on the Main Light Shadows and Additional Lights sub graphs, in order to support Shadowmask baked lighting mode)
   - Outputs : Shadowmask (Vector4)
 - **Ambient** (uses per-pixel SampleSH, use add node to apply this. Alternatively use the Baked GI node instead of this one)

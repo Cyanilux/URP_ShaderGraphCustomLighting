@@ -106,10 +106,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 259.0,
+            "x": 239.0,
             "y": -74.0,
-            "width": 131.0,
-            "height": 149.0
+            "width": 127.0,
+            "height": 125.0
         }
     },
     "m_Slots": [
@@ -120,7 +120,7 @@
             "m_Id": "bd707ec20be29181868244301b2ba07f"
         },
         {
-            "m_Id": "b512ec5f49d6fc8eadca24e04b10c441"
+            "m_Id": "a709bcfbde214756bfb88dccd590d8f4"
         }
     ],
     "synonyms": [],
@@ -159,7 +159,7 @@
             "m_Id": "4a6dd49c99fb4d8088e5738f060aecf6"
         },
         {
-            "m_Id": "df5d48a41fc1c88da7ed7cd44f4e0eac"
+            "m_Id": "92a421c8566b451bbf9906125a90f7c0"
         }
     ],
     "synonyms": [
@@ -167,7 +167,7 @@
         "HLSL"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -234,6 +234,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "92a421c8566b451bbf9906125a90f7c0",
+    "m_Id": 3,
+    "m_DisplayName": "DistanceAtten",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "DistanceAtten",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "a0d02e573b3ba68fa9f13362f0e6255f",
     "m_Id": 1,
@@ -262,18 +277,16 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "b512ec5f49d6fc8eadca24e04b10c441",
+    "m_ObjectId": "a709bcfbde214756bfb88dccd590d8f4",
     "m_Id": 3,
-    "m_DisplayName": "Distance Atten",
+    "m_DisplayName": "CullingMask",
     "m_SlotType": 0,
     "m_Hidden": false,
-    "m_ShaderOutputName": "DistanceAtten",
+    "m_ShaderOutputName": "CullingMask",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
-    "m_Labels": [
-        "X"
-    ]
+    "m_Labels": []
 }
 
 {
@@ -300,23 +313,6 @@
         "X",
         "Y",
         "Z"
-    ]
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "df5d48a41fc1c88da7ed7cd44f4e0eac",
-    "m_Id": 3,
-    "m_DisplayName": "Distance Atten",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "DistanceAtten",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": [
-        "X"
     ]
 }
 

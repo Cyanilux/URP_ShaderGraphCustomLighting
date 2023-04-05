@@ -81,7 +81,11 @@
             "m_Id": "09324d333b3344bfa9c91e1cc22d6564"
         }
     ],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "f9f0c655e9fa46878d0745f2f9a9e4df"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -343,7 +347,7 @@
         },
         "preventRotation": false
     },
-    "m_Path": "Custom Lighting",
+    "m_Path": "Custom Lighting/Deprecated",
     "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
@@ -1188,10 +1192,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6d748b0d206bc4829a266631f0d75758",
     "m_Id": 3,
-    "m_DisplayName": "Distance Atten",
+    "m_DisplayName": "CullingMask",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "DistanceAtten",
+    "m_ShaderOutputName": "CullingMask",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -1904,6 +1908,26 @@
     },
     "m_Property": {
         "m_Id": "4961a6d4e4ad3a89a2a6e8eca6204f1b"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "f9f0c655e9fa46878d0745f2f9a9e4df",
+    "m_Title": "Deprecated",
+    "m_Content": "Still works fine, but I've created a Main Light Specular Highlights subgraph which combines this with the Blinn-Phong model via a nice dropdown",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 637.0,
+        "y": -274.0,
+        "width": 193.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": ""
     }
 }
 

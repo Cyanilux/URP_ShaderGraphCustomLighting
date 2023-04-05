@@ -278,7 +278,7 @@
     "m_Guid": {
         "m_GuidSerialized": "69da1628-ab6b-4e6b-a7a5-36e3f72a90ec"
     },
-    "m_Name": "Spec Colour",
+    "m_Name": "SpecularColour",
     "m_DefaultRefNameVersion": 0,
     "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector3_209992F2",
@@ -626,7 +626,7 @@
     "m_Guid": {
         "m_GuidSerialized": "c5e65987-9180-46da-8c4b-58b5c34c40cd"
     },
-    "m_Name": "Lights",
+    "m_Name": "Additional Lights",
     "m_DefaultRefNameVersion": 0,
     "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "BOOLEAN_B19B3866_ON",
@@ -690,10 +690,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
+            "x": 10.0,
             "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "width": 118.0,
+            "height": 101.0
         }
     },
     "m_Slots": [
@@ -822,16 +822,16 @@
             "m_Id": "b017aa5315de77819e61cb21bb79182e"
         },
         {
-            "m_Id": "66551f28961f44908b2c6a8a7f1ab54b"
-        },
-        {
-            "m_Id": "ff64ac2ecc70420a84b2dedbe013420b"
-        },
-        {
             "m_Id": "f4bf772aaae34d2f9780cff2a9b55bc8"
         },
         {
             "m_Id": "9dfd2b8f43f340e3a1d2344ed262e19a"
+        },
+        {
+            "m_Id": "66551f28961f44908b2c6a8a7f1ab54b"
+        },
+        {
+            "m_Id": "ff64ac2ecc70420a84b2dedbe013420b"
         }
     ]
 }
@@ -1243,7 +1243,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "eb135ace7ddb8e82946bb6d4a50070c7",
     "m_Id": 0,
-    "m_DisplayName": "Spec Colour",
+    "m_DisplayName": "SpecularColour",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1429,7 +1429,7 @@
     "m_Guid": {
         "m_GuidSerialized": "1d782cea-8bf4-47b4-a7a6-dfcc49e9412e"
     },
-    "m_Name": "Shadows",
+    "m_Name": "Additional Light Shadows",
     "m_DefaultRefNameVersion": 0,
     "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "BOOLEAN_7FA69C21_ON",

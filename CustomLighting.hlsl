@@ -28,6 +28,23 @@ void MainLight_float (out float3 Direction, out float3 Color, out float Distance
 }
 
 //------------------------------------------------------------------------------------------------------
+// Main Light Cookie
+//------------------------------------------------------------------------------------------------------
+
+/*
+- Obtains the Light Cookie assigned to the Main Light
+- (For usage, You'd want to Multiply the result with your Light Colour)
+- To work in an Unlit Graph, requires keywords :
+	- Boolean Keyword, Global Multi-Compile "_LIGHT_COOKIES"
+*/
+void MainLightCookie_float(float3 WorldPos, out float3 Cookie){
+	Cookie = 1;
+	#if defined(_LIGHT_COOKIES)
+        Cookie = SampleMainLightCookie(WorldPos);
+    #endif
+}
+
+//------------------------------------------------------------------------------------------------------
 // Shadowmask (v10+)
 //------------------------------------------------------------------------------------------------------
 
@@ -66,10 +83,11 @@ void Shadowmask_half (float2 lightmapUV, out half4 Shadowmask){
 
 /*
 - Samples the Shadowmap for the Main Light, based on the World Position passed in. (Position node)
-- Works in an Unlit Graph with all Shadow Cascade options, see above fix! :)
 - For shadows to work in the Unlit Graph, the following keywords must be defined in the blackboard :
-	- Boolean Keyword, Global Multi-Compile "_MAIN_LIGHT_SHADOWS" (must be present to also stop the others being stripped from builds)
-	- Boolean Keyword, Global Multi-Compile "_MAIN_LIGHT_SHADOWS_CASCADE"
+	- Enum Keyword, Global Multi-Compile "_MAIN_LIGHT", with entries :
+		- "SHADOWS"
+		- "SHADOWS_CASCADE"
+		- "SHADOWS_SCREEN"
 	- Boolean Keyword, Global Multi-Compile "_SHADOWS_SOFT"
 - For a PBR/Lit Graph, these keywords are already handled for you.
 */
@@ -77,7 +95,11 @@ void MainLightShadows_float (float3 WorldPos, half4 Shadowmask, out float Shadow
 	#ifdef SHADERGRAPH_PREVIEW
 		ShadowAtten = 1;
 	#else
+		#if defined(_MAIN_LIGHT_SHADOWS_SCREEN) && !defined(_SURFACE_TYPE_TRANSPARENT)
+		float4 shadowCoord = ComputeScreenPos(TransformWorldToHClip(WorldPos));
+		#else
 		float4 shadowCoord = TransformWorldToShadowCoord(WorldPos);
+		#endif
 		ShadowAtten = MainLightShadow(shadowCoord, WorldPos, Shadowmask, _MainLightOcclusionProbes);
 	#endif
 }
