@@ -22,6 +22,9 @@
         },
         {
             "m_Id": "ff64ac2ecc70420a84b2dedbe013420b"
+        },
+        {
+            "m_Id": "713ef680def348d597f281a310e41da6"
         }
     ],
     "m_Dropdowns": [],
@@ -715,6 +718,30 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "713ef680def348d597f281a310e41da6",
+    "m_Guid": {
+        "m_GuidSerialized": "464961b1-2376-4dcc-93b6-4f3d6e50fd0b"
+    },
+    "m_Name": "Forward+",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Forward+",
+    "m_DefaultReferenceName": "_FORWARD",
+    "m_OverrideReferenceName": "_FORWARD_PLUS",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 1,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0,
+    "m_IsEditable": true
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "83faa9ab80acd482956f071416b209a3",
@@ -832,6 +859,9 @@
         },
         {
             "m_Id": "ff64ac2ecc70420a84b2dedbe013420b"
+        },
+        {
+            "m_Id": "713ef680def348d597f281a310e41da6"
         }
     ]
 }
@@ -1440,7 +1470,7 @@
     "m_KeywordType": 0,
     "m_KeywordDefinition": 1,
     "m_KeywordScope": 1,
-    "m_KeywordStages": 63,
+    "m_KeywordStages": 2,
     "m_Entries": [],
     "m_Value": 0,
     "m_IsEditable": true

@@ -19,9 +19,12 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
   - Inputs : WorldPosition, Shadowmask (can leave at 1,1,1,1 if you don't need it)
   - Outputs : ShadowAtten
   - (Now works with all Shadow Cascades settings!)
-- `Main Light Cookie`
+- `Main Light Cookie`- For supporting cookies. Will also enable cookies for additional lights (as they use the same keyword)
   - Inputs : WorldPosition
   - Outputs : Cookie
+- `Main Light Layer Test` - For supporting Light Layers. Pass your shading calculation from main light through here.
+  - Inputs : Shading
+  - Output : Out (with layer mask applied)
 - `Main Light Diffuse` (handles Lambert / NdotL calculation)
   - Inputs : Normal
   - Outputs : Diffuse
@@ -30,7 +33,10 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
   - Outputs : Specular
 
 #### Other
-- `Additional Lights` - Loops through each additional light, point, spotlights, etc, Handling diffuse, specular and shadows. For custom lighting models, you'll need to copy this function and edit it due to the loop, e.g. swap the LightingLambert and LightingSpecular functions out for custom ones. Also see the AdditionalLightsToon function as an example
+- `Additional Lights` - Loops through each additional light, point, spotlights, etc. Handles diffuse, specular and shadows. Supports Forward+ path (in 2022.2+)
+  - Also supports cookies if `Main Light Cookie` node is used (or `_LIGHT_COOKIES` Boolean Keyword is defined in Blackboard)
+  - Also supports light layers if `Main Light Layer Test` node is used (or `_LIGHT_LAYERS` Boolean Keyword is defined in Blackboard)
+  - For creating custom lighting models, you'll need to copy this function and edit it due to the loop, e.g. swap the LightingLambert and LightingSpecular functions out for custom ones. Also see the AdditionalLightsToon function as an example
   - Inputs : SpecularColour, Smoothness, Normal, Shadowmask
   - Outputs : Diffuse, Specular
 - `Sample Shadowmask` - attach this to the Shadowmask port on the Main Light Shadows and Additional Lights sub graphs, in order to support Shadowmask baked lighting mode
