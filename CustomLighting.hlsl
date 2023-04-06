@@ -32,7 +32,7 @@ void MainLight_float (out float3 Direction, out float3 Color, out float Distance
 //------------------------------------------------------------------------------------------------------
 
 #ifndef SHADERGRAPH_PREVIEW
-	#if VERSION_LOWER(14, 0) // 2022.2
+	#if UNITY_VERSION < 202220
 	/*
 	GetMeshRenderingLayer() is only available in 2022.2+
 	Previous versions need to use GetMeshRenderingLightLayer()
@@ -233,6 +233,12 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
 	}
 	#endif
 
+	// For Foward+ the LIGHT_LOOP_BEGIN macro will use inputData.normalizedScreenSpaceUV, inputData.positionWS, so create that:
+	InputData inputData = (InputData)0;
+	float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+	inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
+	inputData.positionWS = WorldPosition;
+
 	LIGHT_LOOP_BEGIN(pixelLightCount)
 		Light light = GetAdditionalLight(lightIndex, WorldPosition, Shadowmask);
 	#ifdef _LIGHT_LAYERS
@@ -265,16 +271,18 @@ AdditionalLights_float(SpecColor, Smoothness, WorldPosition, WorldNormal, WorldV
 - Calculates light attenuation values to produce multiple bands for a toon effect. See AdditionalLightsToon function below
 */
 #ifndef SHADERGRAPH_PREVIEW
-float ToonAttenuation(int i, float3 positionWS, float pointBands, float spotBands){
-	int perObjectLightIndex = GetPerObjectLightIndex(i); // (i = index used in loop)
+float ToonAttenuation(int lightIndex, float3 positionWS, float pointBands, float spotBands){
+	#if !USE_FORWARD_PLUS
+		lightIndex = GetPerObjectLightIndex(lightIndex);
+	#endif
 	#if USE_STRUCTURED_BUFFER_FOR_LIGHT_DATA
-		float4 lightPositionWS = _AdditionalLightsBuffer[perObjectLightIndex].position;
-		half4 spotDirection = _AdditionalLightsBuffer[perObjectLightIndex].spotDirection;
-		half4 distanceAndSpotAttenuation = _AdditionalLightsBuffer[perObjectLightIndex].attenuation;
+		float4 lightPositionWS = _AdditionalLightsBuffer[lightIndex].position;
+		half4 spotDirection = _AdditionalLightsBuffer[lightIndex].spotDirection;
+		half4 distanceAndSpotAttenuation = _AdditionalLightsBuffer[lightIndex].attenuation;
 	#else
-		float4 lightPositionWS = _AdditionalLightsPosition[perObjectLightIndex];
-		half4 spotDirection = _AdditionalLightsSpotDir[perObjectLightIndex];
-		half4 distanceAndSpotAttenuation = _AdditionalLightsAttenuation[perObjectLightIndex];
+		float4 lightPositionWS = _AdditionalLightsPosition[lightIndex];
+		half4 spotDirection = _AdditionalLightsSpotDir[lightIndex];
+		half4 distanceAndSpotAttenuation = _AdditionalLightsAttenuation[lightIndex];
 	#endif
 
 	// Point
@@ -335,6 +343,12 @@ void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 World
 		}
 	}
 	#endif
+
+	// For Foward+ the LIGHT_LOOP_BEGIN macro will use inputData.normalizedScreenSpaceUV, inputData.positionWS, so create that:
+	InputData inputData = (InputData)0;
+	float4 screenPos = ComputeScreenPos(TransformWorldToHClip(WorldPosition));
+	inputData.normalizedScreenSpaceUV = screenPos.xy / screenPos.w;
+	inputData.positionWS = WorldPosition;
 
 	LIGHT_LOOP_BEGIN(pixelLightCount)
 		Light light = GetAdditionalLight(lightIndex, WorldPosition, Shadowmask);
