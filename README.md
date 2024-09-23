@@ -10,6 +10,9 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
   - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git`
 - Alternatively, download and put the folder in your Assets
 
+### Known Issues : 
+- If using your own Sub Graphs, be aware that Shader Graph does not include keywords in nested Sub Graphs. So for some of my subgraphs, you may need to open them and copy the Boolean/Enum Keywords in the Blackboard to your subgraph (or every main graph where it's used)
+
 ### Includes Sub Graphs for :
 
 #### Main Light
