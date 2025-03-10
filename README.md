@@ -12,6 +12,7 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
 
 ### Known Issues : 
 - If using your own Sub Graphs, be aware that Shader Graph does not include keywords in nested Sub Graphs. So for some of my subgraphs, you may need to open them and copy the Boolean/Enum Keywords in the Blackboard to your subgraph (or every main graph where it's used)
+- If using Unity 6 & Forward+ path, define `_FORWARD_PLUS` in blackboard - see [issue 26](https://github.com/Cyanilux/URP_ShaderGraphCustomLighting/issues/26)
 
 ### Includes Sub Graphs for :
 
