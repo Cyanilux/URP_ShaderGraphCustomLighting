@@ -1,6 +1,6 @@
 {
   "name": "com.cyanilux.shadergraph-customlighting",
-  "version": "17.0.0",
+  "version": "17.1.0",
   "displayName": "Shader Graph / URP Custom Lighting",
   "description": "Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline",
  "keywords": [
