@@ -2,17 +2,16 @@
 Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. If anything breaks, let me know by opening an issue!
 
 ```diff
-+ This version is for URP v12+ (Unity 2021.2+) For use with older versions use the v8 branch!
++ This version is for URP v17 / Unity 6000.0 - For older or newer versions, see branches!
 ```
 
 ### Setup:
 - Install via Package Manager → Add package via git URL : 
-  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git`
+  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git#6000.0`
 - Alternatively, download and put the folder in your Assets
 
 ### Known Issues : 
 - If using your own Sub Graphs, be aware that Shader Graph does not include keywords in nested Sub Graphs. So for some of my subgraphs, you may need to open them and copy the Boolean/Enum Keywords in the Blackboard to your subgraph (or every main graph where it's used)
-- If using Unity 6 & Forward+ path, define `_FORWARD_PLUS` in blackboard - see [issue 26](https://github.com/Cyanilux/URP_ShaderGraphCustomLighting/issues/26)
 
 ### Includes Sub Graphs for :
 
@@ -45,9 +44,6 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
   - Outputs : Diffuse, Specular
 - `Sample Shadowmask` - attach this to the Shadowmask port on the Main Light Shadows and Additional Lights sub graphs, in order to support Shadowmask baked lighting mode
   - Outputs : Shadowmask
-- `Ambient SampleSH` - uses per-pixel SampleSH, use add node to apply this. Can alternatively use the built-in Baked GI node)
-  - Inputs : Normal
-  - Outputs : Ambient
 - `Subtractive GI` - for supporting Subtractive baked lighting mode. Should connect Main Light Shadows node to first port. Uses MixRealtimeAndBakedGI function from URP ShaderLibrary
   - Inputs : ShadowAtten, Normal, BakedGI
   - Outputs : Out (Vector3)
@@ -57,6 +53,9 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
   
 #### Deprecated
 - `Phong Specular` and `Blinn-Phong Specular` subgraphs are now considered deprecated - use `Main Light Specular Highlights` instead.
+- `Ambient SampleSH` - uses per-pixel SampleSH. Somewhat redundant, should prefer using the built-in `Baked GI` node
+  - Inputs : Normal
+  - Outputs : Ambient
 
 ### Included Examples
 - **Toon** -  Toon/Cel Shading. Main Light (ramp texture) & Additional Lights (number of bands). Also supports Main Light Cookies, BakedGI (including Subtractive & Shadowmask), Fog
