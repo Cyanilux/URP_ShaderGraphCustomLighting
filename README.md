@@ -2,17 +2,17 @@
 Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. If anything breaks, let me know by opening an issue!
 
 ```diff
-+ This version is for URP v12+ (Unity 2021.2+) For use with older versions use the v8 branch!
++ This version is for URP v12+ (Unity 2021.2+)
+- For older or newer (Unity 6000+) versions, see branches!
 ```
 
 ### Setup:
 - Install via Package Manager → Add package via git URL : 
-  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git`
+  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git#2021.2+`
 - Alternatively, download and put the folder in your Assets
 
 ### Known Issues : 
 - If using your own Sub Graphs, be aware that Shader Graph does not include keywords in nested Sub Graphs. So for some of my subgraphs, you may need to open them and copy the Boolean/Enum Keywords in the Blackboard to your subgraph (or every main graph where it's used)
-- If using Unity 6 & Forward+ path, define `_FORWARD_PLUS` in blackboard - see [issue 26](https://github.com/Cyanilux/URP_ShaderGraphCustomLighting/issues/26)
 
 ### Includes Sub Graphs for :
 
