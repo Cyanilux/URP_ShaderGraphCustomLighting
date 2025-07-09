@@ -2,7 +2,8 @@
 Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. If anything breaks, let me know by opening an issue!
 
 ```diff
-+ This version is for URP v17 / Unity 6000.0 - For older or newer versions, see branches!
++ This version is for URP v17 / Unity 6000.0
+- For older versions, see branches!
 ```
 
 ### Setup:
