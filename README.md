@@ -8,7 +8,7 @@ Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pip
 
 ### Setup:
 - Install via Package Manager → Add package via git URL : 
-  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git#2021.2+`
+  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git#2021.2`
 - Alternatively, download and put the folder in your Assets
 
 ### Known Issues : 
