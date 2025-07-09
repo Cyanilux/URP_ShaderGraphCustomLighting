@@ -373,6 +373,7 @@
     "m_OutputNode": {
         "m_Id": "1433533131b53a8aa72faf0a5a1859f8"
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": []
 }
 
@@ -410,6 +411,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -543,6 +545,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -579,6 +582,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -653,8 +657,8 @@
     "m_ObjectId": "33209359d8c74b8f90d2f2bf90c1e5b7",
     "m_Title": "Smoothness",
     "m_Position": {
-        "x": -1713.0001220703125,
-        "y": 1773.0
+        "x": 21.000022888183595,
+        "y": 157.00003051757813
     }
 }
 
@@ -687,6 +691,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -869,6 +874,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -911,6 +917,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -923,8 +930,8 @@
     "m_ObjectId": "50c92c1261234568b6e3c5b337601768",
     "m_Title": "H Dot N",
     "m_Position": {
-        "x": -32.000022888183597,
-        "y": -241.0
+        "x": 197.00003051757813,
+        "y": -240.99993896484376
     }
 }
 
@@ -1050,6 +1057,7 @@
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": true,
     "m_CustomSlotLabel": "World Space",
+    "m_DismissedVersion": 0,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -1068,8 +1076,8 @@
     "m_ObjectId": "66d19248ec6848f4b4c441aaf82469c6",
     "m_Title": "Specular Highlight (Blinn-Phong)",
     "m_Position": {
-        "x": -1328.0,
-        "y": 1369.0001220703125
+        "x": 386.0,
+        "y": -240.99993896484376
     }
 }
 
@@ -1186,6 +1194,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1213,7 +1222,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": [
         "X",
@@ -1248,6 +1257,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1263,8 +1273,8 @@
     "m_ObjectId": "8d9c735ecc074431b9fcfb5efee2db15",
     "m_Title": "Normal",
     "m_Position": {
-        "x": -629.0,
-        "y": -15.999969482421875
+        "x": -628.9999389648438,
+        "y": -15.999984741210938
     }
 }
 
@@ -1298,8 +1308,8 @@
     "m_ObjectId": "919a8e546d5d4858939c6125f921a7cb",
     "m_Title": "Main Light",
     "m_Position": {
-        "x": -353.9999694824219,
-        "y": -419.9999694824219
+        "x": -353.99993896484377,
+        "y": -419.99993896484377
     }
 }
 
@@ -1387,6 +1397,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1445,6 +1456,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 2,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1484,6 +1496,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1670,6 +1683,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1779,6 +1793,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1878,6 +1893,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 2,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1891,8 +1907,8 @@
     "m_ObjectId": "da3feadf9af841a7b0614bd7be8e2752",
     "m_Title": "Halfway vector",
     "m_Position": {
-        "x": -151.99993896484376,
-        "y": -240.99996948242188
+        "x": -152.0,
+        "y": -240.99993896484376
     }
 }
 
@@ -1932,6 +1948,7 @@
     ],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1994,6 +2011,7 @@
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -2062,6 +2080,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []

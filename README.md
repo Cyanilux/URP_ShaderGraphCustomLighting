@@ -2,16 +2,17 @@
 Some custom lighting functions/sub-graphs for Shader Graph, Universal Render Pipeline. If anything breaks, let me know by opening an issue!
 
 ```diff
-+ This version is for URP v17 / Unity 6000.0 - For older or newer versions, see branches!
++ This version is for URP v17.1+ / Unity 6000.1+
+- For older (including 6000.0) versions, see branches!
 ```
 
 ### Setup:
 - Install via Package Manager → Add package via git URL : 
-  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git#6000.0`
+  - `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git`
 - Alternatively, download and put the folder in your Assets
 
 ### Known Issues : 
-- If using your own Sub Graphs, be aware that Shader Graph does not include keywords in nested Sub Graphs. So for some of my subgraphs, you may need to open them and copy the Boolean/Enum Keywords in the Blackboard to your subgraph (or every main graph where it's used)
+- Be aware that Shader Graph does not include keywords from blackboard if nested in multiple Sub Graphs. So for some of my subgraphs (ML Cookie, ML Layer Test, Sample Shadowmask & Subtractive GI), you may need to open them and copy the Boolean Keywords in the Blackboard to your subgraph (or every main graph where it's used)
 
 ### Includes Sub Graphs for :
 

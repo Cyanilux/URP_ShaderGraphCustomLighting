@@ -2,8 +2,28 @@
 #define CUSTOM_LIGHTING_INCLUDED
 
 // @Cyanilux | https://github.com/Cyanilux/URP_ShaderGraphCustomLighting
-// This version is intended for use in Unity 6+
+// This version is intended for use in Unity 6.1+
 // For older versions, see branches on github repo!
+
+//------------------------------------------------------------------------------------------------------
+// Keyword Pragmas
+//------------------------------------------------------------------------------------------------------
+
+#ifndef SHADERGRAPH_PREVIEW
+	#if SHADERPASS != SHADERPASS_FORWARD && SHADERPASS != SHADERPASS_GBUFFER
+		// #if to avoid "duplicate keyword" warnings if this is included in a Lit Graph
+
+    	#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+    	#pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
+		#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+		#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+		#pragma multi_compile _ _CLUSTER_LIGHT_LOOP
+
+		// Left some keywords (e.g. light layers, cookies) in subgraphs to help avoid unnecessary shader variants
+		// But means if those subgraphs are nested in another, you'll need to copy the keywords from blackboard
+
+	#endif
+#endif
 
 //------------------------------------------------------------------------------------------------------
 // Main Light
@@ -13,9 +33,7 @@
 - Obtains the Direction, Color and DistanceAtten for the Main Directional Light
 - (DistanceAtten is either 1 or 0, depending if the object is in the light's Culling Mask or not)
 - For shadows, see MainLightShadows_float
-- For DistanceAtten output to work in the Forward+ path in an Unlit Graph, requires keyword :
-	- Boolean Keyword, Global Multi-Compile "_FORWARD_PLUS"
-	reasons explained here : https://github.com/Cyanilux/URP_ShaderGraphCustomLighting/issues/26
+- For DistanceAtten output to work in the Forward+ path "_CLUSTER_LIGHT_LOOP" keyword is required
 */
 void MainLight_float(out float3 Direction, out float3 Color, out float DistanceAtten){
 	#ifdef SHADERGRAPH_PREVIEW
@@ -70,17 +88,6 @@ void MainLightCookie_float(float3 WorldPos, out float3 Cookie){
 
 /*
 - Samples the Shadowmap for the Main Light, based on the World Position passed in. (Position node)
-- For shadows to work in the Unlit Graph, the following keywords must be defined in the blackboard :
-	- Enum Keyword, Global Multi-Compile "_MAIN_LIGHT", with entries :
-		- "SHADOWS"
-		- "SHADOWS_CASCADE"
-		- "SHADOWS_SCREEN"
-	- Enum Keyword, Global Multi-Compile "_SHADOWS", with entires :
-		- "SOFT"
-		- "SOFT_LOW"
-		- "SOFT_MEDIUM"
-		- "SOFT_HIGH"
-- For a PBR/Lit Graph, these keywords are already handled for you.
 */
 void MainLightShadows_float(float3 WorldPos, half4 Shadowmask, out float ShadowAtten){
 	#ifdef SHADERGRAPH_PREVIEW
@@ -145,10 +152,7 @@ void SubtractiveGI_float(float ShadowAtten, float3 NormalWS, float3 BakedGI, out
 /*
 - Handles additional lights (e.g. additional directional, point, spotlights)
 - For custom lighting, you may want to duplicate this and swap the LightingLambert / LightingSpecular functions out. See Toon Example below!
-- To work in the Unlit Graph, the following keywords must be defined in the blackboard :
-	- Boolean Keyword, Global Multi-Compile "_ADDITIONAL_LIGHT_SHADOWS"
-	- Boolean Keyword, Global Multi-Compile "_ADDITIONAL_LIGHTS"
-	- Boolean Keyword, Global Multi-Compile "_FORWARD_PLUS"
+- Requires keywords "_ADDITIONAL_LIGHTS", "_ADDITIONAL_LIGHT_SHADOWS" & "_CLUSTER_LIGHT_LOOP"
 */
 void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView, half4 Shadowmask,
 							out float3 Diffuse, out float3 Specular) {
@@ -159,9 +163,9 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
 	uint pixelLightCount = GetAdditionalLightsCount();
 	uint meshRenderingLayers = GetMeshRenderingLayer();
 
-	#if USE_FORWARD_PLUS
+	#if USE_CLUSTER_LIGHT_LOOP
 	for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++) {
-		FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
+		CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK
 		Light light = GetAdditionalLight(lightIndex, WorldPosition, Shadowmask);
 	#ifdef _LIGHT_LAYERS
 		if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
@@ -208,7 +212,7 @@ void AdditionalLights_float(float3 SpecColor, float Smoothness, float3 WorldPosi
 */
 #ifndef SHADERGRAPH_PREVIEW
 float ToonAttenuation(int lightIndex, float3 positionWS, float pointBands, float spotBands){
-	#if !USE_FORWARD_PLUS
+	#if !USE_CLUSTER_LIGHT_LOOP
 		lightIndex = GetPerObjectLightIndex(lightIndex);
 	#endif
 	#if USE_STRUCTURED_BUFFER_FOR_LIGHT_DATA
@@ -245,10 +249,7 @@ float ToonAttenuation(int lightIndex, float3 positionWS, float pointBands, float
 
 /*
 - Handles additional lights (e.g. point, spotlights) with banded toon effect
-- To work in the Unlit Graph, the following keywords must be defined in the blackboard :
-	- Boolean Keyword, Global Multi-Compile "_ADDITIONAL_LIGHT_SHADOWS"
-	- Boolean Keyword, Global Multi-Compile "_ADDITIONAL_LIGHTS"
-	- Boolean Keyword, Global Multi-Compile "_FORWARD_PLUS"
+- Requires keywords "_ADDITIONAL_LIGHTS", "_ADDITIONAL_LIGHT_SHADOWS" & "_CLUSTER_LIGHT_LOOP"
 */
 void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView, half4 Shadowmask,
 						float PointLightBands, float SpotLightBands,
@@ -261,9 +262,9 @@ void AdditionalLightsToon_float(float3 SpecColor, float Smoothness, float3 World
 	uint pixelLightCount = GetAdditionalLightsCount();
 	uint meshRenderingLayers = GetMeshRenderingLayer();
 
-	#if USE_FORWARD_PLUS
+	#if USE_CLUSTER_LIGHT_LOOP
 	for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++) {
-		FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
+		CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK
 		Light light = GetAdditionalLight(lightIndex, WorldPosition, Shadowmask);
 	#ifdef _LIGHT_LAYERS
 		if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))

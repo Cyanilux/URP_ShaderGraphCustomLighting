@@ -25,15 +25,6 @@
     "m_Keywords": [
         {
             "m_Id": "8e274bd4593346759a8e16b8ce711c25"
-        },
-        {
-            "m_Id": "11d2a55c100046bca17acf9f22d9045e"
-        },
-        {
-            "m_Id": "08e798f625a148f89b32dc20e43d911f"
-        },
-        {
-            "m_Id": "f2ed647ea4314653b98f89db1deb1171"
         }
     ],
     "m_Dropdowns": [],
@@ -1523,31 +1514,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
-    "m_ObjectId": "08e798f625a148f89b32dc20e43d911f",
-    "m_Guid": {
-        "m_GuidSerialized": "ba2788d5-5477-426a-b3b0-62b6b68083cb"
-    },
-    "m_Name": "Additional Light Shadows",
-    "m_DefaultRefNameVersion": 0,
-    "m_RefNameGeneratedByDisplayName": "",
-    "m_DefaultReferenceName": "BOOLEAN_FEFFF4DF_ON",
-    "m_OverrideReferenceName": "_ADDITIONAL_LIGHT_SHADOWS",
-    "m_GeneratePropertyBlock": false,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
-    "m_KeywordScope": 1,
-    "m_KeywordStages": 2,
-    "m_Entries": [],
-    "m_Value": 0,
-    "m_IsEditable": true
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "097984f43794128393f2eadcae6490e1",
@@ -1886,31 +1852,6 @@
     "m_Labels": [
         "X"
     ]
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
-    "m_ObjectId": "11d2a55c100046bca17acf9f22d9045e",
-    "m_Guid": {
-        "m_GuidSerialized": "3cf5fd3c-e41d-43db-97fc-cf53d9476184"
-    },
-    "m_Name": "Additional Lights",
-    "m_DefaultRefNameVersion": 0,
-    "m_RefNameGeneratedByDisplayName": "",
-    "m_DefaultReferenceName": "BOOLEAN_712A6BE_ON",
-    "m_OverrideReferenceName": "_ADDITIONAL_LIGHTS",
-    "m_GeneratePropertyBlock": false,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
-    "m_KeywordScope": 1,
-    "m_KeywordStages": 63,
-    "m_Entries": [],
-    "m_Value": 0,
-    "m_IsEditable": true
 }
 
 {
@@ -4047,15 +3988,6 @@
         },
         {
             "m_Id": "c7b3df7ab53f42f3b2bfa6595522c937"
-        },
-        {
-            "m_Id": "11d2a55c100046bca17acf9f22d9045e"
-        },
-        {
-            "m_Id": "08e798f625a148f89b32dc20e43d911f"
-        },
-        {
-            "m_Id": "f2ed647ea4314653b98f89db1deb1171"
         }
     ]
 }
@@ -4241,6 +4173,7 @@
     },
     "isMainTexture": true,
     "useTilingAndOffset": true,
+    "useTexelSize": true,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
@@ -5487,6 +5420,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "AdditionalLightsToon",
     "m_FunctionSource": "5c09ec492074d214fbe1a19781ad15e8",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -6871,6 +6805,7 @@
     },
     "isMainTexture": false,
     "useTilingAndOffset": false,
+    "useTexelSize": true,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
@@ -7914,7 +7849,7 @@
     "m_Title": "Main Light Cookie",
     "m_Position": {
         "x": -1904.0,
-        "y": -399.0000305175781
+        "y": -399.0
     }
 }
 
@@ -8740,31 +8675,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
-    "m_ObjectId": "f2ed647ea4314653b98f89db1deb1171",
-    "m_Guid": {
-        "m_GuidSerialized": "e1bab1ec-e5a9-4120-9b01-2227bcb9e274"
-    },
-    "m_Name": "Forward+",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Forward+",
-    "m_DefaultReferenceName": "_FORWARD",
-    "m_OverrideReferenceName": "_FORWARD_PLUS",
-    "m_GeneratePropertyBlock": false,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
-    "m_KeywordScope": 1,
-    "m_KeywordStages": 63,
-    "m_Entries": [],
-    "m_Value": 0,
-    "m_IsEditable": true
 }
 
 {

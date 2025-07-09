@@ -10,14 +10,7 @@
             "m_Id": "f0e0b7c9dc84459b9872e8ec2c4fb3ca"
         }
     ],
-    "m_Keywords": [
-        {
-            "m_Id": "70080533ec814c13a94c4028ed1d264b"
-        },
-        {
-            "m_Id": "8ee9b0534b7545d2accff6d07db20888"
-        }
-    ],
+    "m_Keywords": [],
     "m_Dropdowns": [],
     "m_CategoryData": [
         {
@@ -208,12 +201,6 @@
         },
         {
             "m_Id": "f0e0b7c9dc84459b9872e8ec2c4fb3ca"
-        },
-        {
-            "m_Id": "70080533ec814c13a94c4028ed1d264b"
-        },
-        {
-            "m_Id": "8ee9b0534b7545d2accff6d07db20888"
         }
     ]
 }
@@ -371,6 +358,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "MainLightShadows",
     "m_FunctionSource": "5c09ec492074d214fbe1a19781ad15e8",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -477,52 +465,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
-    "m_ObjectId": "70080533ec814c13a94c4028ed1d264b",
-    "m_Guid": {
-        "m_GuidSerialized": "3678795c-ea8d-481d-ba86-f0b64554d241"
-    },
-    "m_Name": "MainLightShadows",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MainLightShadows",
-    "m_DefaultReferenceName": "_MAINLIGHTSHADOWS",
-    "m_OverrideReferenceName": "_MAIN_LIGHT",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_KeywordType": 1,
-    "m_KeywordDefinition": 1,
-    "m_KeywordScope": 1,
-    "m_KeywordStages": 63,
-    "m_Entries": [
-        {
-            "id": 5,
-            "displayName": "OFF",
-            "referenceName": "OFF"
-        },
-        {
-            "id": 1,
-            "displayName": "SHADOWS",
-            "referenceName": "SHADOWS"
-        },
-        {
-            "id": 4,
-            "displayName": "SHADOWS_CASCADE",
-            "referenceName": "SHADOWS_CASCADE"
-        },
-        {
-            "id": 3,
-            "displayName": "SHADOWS_SCREEN",
-            "referenceName": "SHADOWS_SCREEN"
-        }
-    ],
-    "m_Value": 0,
-    "m_IsEditable": true
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "7d190f51c889ce8198ca0ecfe494d421",
@@ -575,57 +517,6 @@
         "z": 0.0,
         "w": 0.0
     }
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
-    "m_ObjectId": "8ee9b0534b7545d2accff6d07db20888",
-    "m_Guid": {
-        "m_GuidSerialized": "3ab39840-9328-49c4-b040-ca615fa30d92"
-    },
-    "m_Name": "SoftShadows",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "SoftShadows",
-    "m_DefaultReferenceName": "_SOFTSHADOWS",
-    "m_OverrideReferenceName": "_SHADOWS",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_KeywordType": 1,
-    "m_KeywordDefinition": 1,
-    "m_KeywordScope": 1,
-    "m_KeywordStages": 2,
-    "m_Entries": [
-        {
-            "id": 2,
-            "displayName": "HARD",
-            "referenceName": "HARD"
-        },
-        {
-            "id": 4,
-            "displayName": "SOFT",
-            "referenceName": "SOFT"
-        },
-        {
-            "id": 3,
-            "displayName": "SOFT_LOW",
-            "referenceName": "SOFT_LOW"
-        },
-        {
-            "id": 5,
-            "displayName": "SOFT_MEDIUM",
-            "referenceName": "SOFT_MEDIUM"
-        },
-        {
-            "id": 1,
-            "displayName": "SOFT_HIGH",
-            "referenceName": "SOFT_HIGH"
-        }
-    ],
-    "m_Value": 0,
-    "m_IsEditable": true
 }
 
 {

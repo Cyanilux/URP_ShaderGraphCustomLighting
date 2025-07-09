@@ -3,11 +3,7 @@
     "m_Type": "UnityEditor.ShaderGraph.GraphData",
     "m_ObjectId": "c74005a6471a43bfbba1a72bd79a3a70",
     "m_Properties": [],
-    "m_Keywords": [
-        {
-            "m_Id": "b5ca4cdf89444731aaffc713af3ce2fc"
-        }
-    ],
+    "m_Keywords": [],
     "m_Dropdowns": [],
     "m_CategoryData": [
         {
@@ -182,6 +178,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "MainLight",
     "m_FunctionSource": "5c09ec492074d214fbe1a19781ad15e8",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -297,31 +294,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
-    "m_ObjectId": "b5ca4cdf89444731aaffc713af3ce2fc",
-    "m_Guid": {
-        "m_GuidSerialized": "e3aac748-e545-44c4-a4d9-c3b80c30bcff"
-    },
-    "m_Name": "Forward+",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Forward+",
-    "m_DefaultReferenceName": "_FORWARD",
-    "m_OverrideReferenceName": "_FORWARD_PLUS",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
-    "m_KeywordScope": 1,
-    "m_KeywordStages": 63,
-    "m_Entries": [],
-    "m_Value": 0,
-    "m_IsEditable": true
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "bd707ec20be29181868244301b2ba07f",
@@ -353,10 +325,6 @@
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "ea839da0743e41379af3acae1158e7eb",
     "m_Name": "",
-    "m_ChildObjectList": [
-        {
-            "m_Id": "b5ca4cdf89444731aaffc713af3ce2fc"
-        }
-    ]
+    "m_ChildObjectList": []
 }
 
